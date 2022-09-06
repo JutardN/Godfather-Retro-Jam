@@ -5,35 +5,56 @@ using UnityEngine;
 public class Meteor : MonoBehaviour
 {
     public Vector2 speedMinMax;
-    float speed;
-    public GameObject dir1;
-    public GameObject dir2;
-    public GameObject dir3;
-    public GameObject dir4;
-    public GameObject dir5;
-    public GameObject dir6;
     public Vector3 direction;
+    private Vector3 initPos;
 
-    float visibleHeightThreshold;
+    public Vector3 dir1;
+    public Vector3 dir2;
+    public Vector3 dir3;
+    public Vector3 dir4;
+    public Vector3 dir5;
+    public Vector3 dir6;
 
-    // Start is called before the first frame update
-    void Start()
+    private float elapsedTime;
+    public float duration = 4f;
+
+    private void Awake()
     {
-        speed = Mathf.Lerp(speedMinMax.x, speedMinMax.y, Difficulty.GetDifficultyPercent());
-        visibleHeightThreshold = -Camera.main.orthographicSize - transform.localScale.y;
+        initPos = transform.position;
+    }
+    void Start()
+    {       
+        dir1 = GameObject.FindGameObjectWithTag("dir1").transform.position;
+        dir2 = GameObject.FindGameObjectWithTag("dir2").transform.position;
+        dir3 = GameObject.FindGameObjectWithTag("dir3").transform.position;
+        dir4 = GameObject.FindGameObjectWithTag("dir4").transform.position;
+        dir5 = GameObject.FindGameObjectWithTag("dir5").transform.position;
+        dir6 = GameObject.FindGameObjectWithTag("dir6").transform.position;
 
+        int random = Random.Range(1, 6);
 
+        if (random == 1)
+            direction = dir1;
+        else if (random == 2)
+            direction = dir2;
+        else if (random == 3)
+            direction = dir3;
+        else if (random == 4)
+            direction = dir4;
+        else if (random == 5)
+            direction = dir5;
+        else
+            direction = dir6;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        elapsedTime += Time.deltaTime;
+        float percentageCompleted = (elapsedTime / duration);
 
-        
+        transform.position = Vector2.Lerp(initPos, direction, percentageCompleted);
 
-        transform.Translate(Vector3.down  * speed * Time.deltaTime, Space.Self);
-
-        if (transform.position.y < visibleHeightThreshold)
+        if (transform.position.y == dir1.y || transform.position.y == dir2.y || transform.position.y == dir3.y || transform.position.y == dir4.y || transform.position.y == dir5.y || transform.position.y == dir6.y)
         {
             Destroy(gameObject);
         }

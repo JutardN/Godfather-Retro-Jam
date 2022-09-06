@@ -227,7 +227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46367838}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.0043, y: -5.51, z: 0}
+  m_LocalPosition: {x: -0, y: -5.49, z: 0}
   m_LocalScale: {x: 1, y: 11.16488, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 106000969}
   m_Layer: 0
   m_Name: Direction6
-  m_TagString: Untagged
+  m_TagString: dir6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 652815104}
   m_Layer: 0
   m_Name: Direction1
-  m_TagString: Untagged
+  m_TagString: dir1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 1016726175}
   m_Layer: 0
   m_Name: Direction4
-  m_TagString: Untagged
+  m_TagString: dir4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 1159609572}
   m_Layer: 0
   m_Name: Direction2
-  m_TagString: Untagged
+  m_TagString: dir2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 1213256852}
   m_Layer: 0
   m_Name: Direction3
-  m_TagString: Untagged
+  m_TagString: dir3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1012,7 +1012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1782671711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   meteor: {fileID: 2213433637674954166, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
   secondsBetweenSpawnsMinMax: {x: 1, y: 2}
   spawnSizeMinMax: {x: 1, y: 1}
-  spawnAngleMax: 0
+  spawnAngleMax: 360
 --- !u!4 &1782671712
 Transform:
   m_ObjectHideFlags: 0
@@ -1146,7 +1146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -682653350540877771, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
       propertyPath: duration
-      value: 100
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2213433637674954165, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
       propertyPath: m_RootOrder
@@ -1154,11 +1154,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2213433637674954165, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.71
+      value: -6.55
       objectReference: {fileID: 0}
     - target: {fileID: 2213433637674954165, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.77
+      value: 6.37
       objectReference: {fileID: 0}
     - target: {fileID: 2213433637674954165, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1195,6 +1195,10 @@ PrefabInstance:
     - target: {fileID: 2213433637674954166, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
       propertyPath: m_Name
       value: Meteor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213433637674954166, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
@@ -1321,7 +1325,7 @@ GameObject:
   - component: {fileID: 2106279702}
   m_Layer: 0
   m_Name: Direction5
-  m_TagString: Untagged
+  m_TagString: dir5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

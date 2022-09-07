@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-
-    public GameObject dir1;
     public GameObject meteor;
 
     float nextSpawnTime;
@@ -35,10 +33,9 @@ public class Spawner : MonoBehaviour
             Vector2 spawnPosition = new Vector2(Random.Range(-screenHalfSizeWorldUnits.x, screenHalfSizeWorldUnits.x), screenHalfSizeWorldUnits.y + spawnSize);
             GameObject newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward * spawnAngle));
             newBlock.transform.localScale = Vector2.one * spawnSize;
-        
+
+            Debug.Log(Difficulty.GetDifficultyPercent());
         }
-
-
 
     }
 }

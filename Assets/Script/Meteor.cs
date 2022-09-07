@@ -50,7 +50,6 @@ public class Meteor : MonoBehaviour
         else
             direction = dir6;
 
-        Debug.Log(random);
     }
 
     void Update()

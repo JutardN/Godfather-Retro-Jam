@@ -7,23 +7,25 @@ public class Spawner : MonoBehaviour
 
     public GameObject dir1;
     public GameObject meteor;
-    public Vector2 secondsBetweenSpawnsMinMax;
+
     float nextSpawnTime;
+    public float widthMax = 1;
+    public float spawnAngleMax;
 
     public Vector2 spawnSizeMinMax;
-    public float spawnAngleMax;
+    public Vector2 secondsBetweenSpawnsMinMax;
 
     Vector2 screenHalfSizeWorldUnits;
 
-    // Start is called before the first frame update
     void Start()
     {
-        screenHalfSizeWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
+        // Largeur du spawner ( largeur d'écran x multiplicateur ) 
+        screenHalfSizeWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize * widthMax, Camera.main.orthographicSize);
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Assignation des paramètres du météor lors du spawn
         if (Time.time > nextSpawnTime)
         {
             nextSpawnTime = Time.time + Random.Range(secondsBetweenSpawnsMinMax.y, secondsBetweenSpawnsMinMax.x);
@@ -33,9 +35,10 @@ public class Spawner : MonoBehaviour
             Vector2 spawnPosition = new Vector2(Random.Range(-screenHalfSizeWorldUnits.x, screenHalfSizeWorldUnits.x), screenHalfSizeWorldUnits.y + spawnSize);
             GameObject newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward * spawnAngle));
             newBlock.transform.localScale = Vector2.one * spawnSize;
+        
         }
 
-        
-    
-}
+
+
+    }
 }

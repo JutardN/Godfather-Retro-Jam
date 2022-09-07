@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
-    public Vector2 speedMinMax;
     public Vector3 direction;
     private Vector3 initPos;
 
@@ -17,6 +16,7 @@ public class Meteor : MonoBehaviour
 
     private float elapsedTime;
     public float duration = 4f;
+    private int random;
 
     private void Awake()
     {
@@ -31,8 +31,12 @@ public class Meteor : MonoBehaviour
         dir5 = GameObject.FindGameObjectWithTag("dir5").transform.position;
         dir6 = GameObject.FindGameObjectWithTag("dir6").transform.position;
 
-        int random = Random.Range(1, 6);
+        if (initPos.x >= 0)
+            random = Random.Range(1, 4);
+        else
+            random = Random.Range(4, 7);
 
+            // Assignation de la direction de la météorite
         if (random == 1)
             direction = dir1;
         else if (random == 2)
@@ -45,6 +49,8 @@ public class Meteor : MonoBehaviour
             direction = dir5;
         else
             direction = dir6;
+
+        Debug.Log(random);
     }
 
     void Update()
@@ -52,9 +58,10 @@ public class Meteor : MonoBehaviour
         elapsedTime += Time.deltaTime;
         float percentageCompleted = (elapsedTime / duration);
 
+        // météor se déplaçant vers sa direction
         transform.position = Vector2.Lerp(initPos, direction, percentageCompleted);
 
-        if (transform.position.y == dir1.y || transform.position.y == dir2.y || transform.position.y == dir3.y || transform.position.y == dir4.y || transform.position.y == dir5.y || transform.position.y == dir6.y)
+        if (transform.position.y == direction.y)
         {
             Destroy(gameObject);
         }

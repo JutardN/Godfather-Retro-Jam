@@ -7,16 +7,20 @@ public class PlayerController : MonoBehaviour
     public GameObject[] movementPoints = new GameObject[3];
     int pos;
     public string moveLeft, moveRight;
-    bool attacking,inMovement;
+    bool attacking, inMovement, spamming;
     public BoxCollider2D colliderLeft, colliderRight;
     public float speed;
     public float distanceMin;
     public int score;
+    float currentTimer = 0;
+    float currentTimerSpam;
+    public float timerMeteor;
+    public float timerMeteorSpam;
 
     [Header("Secondary Movement")]
     [SerializeField]
-    bool secondMovement=false;
-    public int speedMovement=10;
+    bool secondMovement = false;
+    public int speedMovement = 10;
     public GameObject limitDistanceLeft, limitDistanceRight;
 
     void Start()
@@ -30,8 +34,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Not Enough Movements Points");
         }
-        if(moveLeft == null || moveRight == null)
-            Debug.LogError("Not Enough Movements Points");
+        if (moveLeft == null || moveRight == null)
+            Debug.LogError("No Key to move");
+
+        currentTimerSpam = timerMeteorSpam;
     }
 
     void Update()
@@ -48,7 +54,6 @@ public class PlayerController : MonoBehaviour
                     if (pos > 0)
                     {
                         pos--;
-                        //this.transform.position = movementPoints[pos].transform.position;
                         inMovement = true;
                     }
                 }
@@ -57,14 +62,13 @@ public class PlayerController : MonoBehaviour
                     if (pos < 2)
                     {
                         pos++;
-                        //this.transform.position = movementPoints[pos].transform.position;
                         inMovement = true;
                     }
                 }
             }
             else
             {
-                this.transform.position += new Vector3(Input.GetAxis("Horizontal"), 0,0) * Time.deltaTime * speedMovement;
+                this.transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 0) * Time.deltaTime * speedMovement;
                 if (this.transform.position.x < limitDistanceLeft.transform.position.x)
                     this.transform.position = limitDistanceLeft.transform.position;
                 if (this.transform.position.x > limitDistanceRight.transform.position.x)
@@ -73,16 +77,15 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-                Debug.Log("Hit left");
                 colliderRight.enabled = false;
                 colliderLeft.enabled = true;
             }
             else if (Input.GetButtonDown("Fire2"))
             {
-                Debug.Log("Hit right");
                 colliderLeft.enabled = false;
                 colliderRight.enabled = true;
             }
+
         }
         if (inMovement)
         {
@@ -102,9 +105,28 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Asteroid")
         {
-            Debug.Log("CASSER");
-            score+=collision.GetComponent<Meteor>().score;
-            Destroy(collision.gameObject);
+            //if (collision.GetComponent<Meteor>().isBig)
+            //{
+            //  currentTimer += Time.deltaTime;
+            //  currentTimerSpam -= Time.deltaTime;
+            //  if (currentTimerSpam <= 0)
+            //  {
+            //      colliderRight.enabled = false;
+            //      colliderLeft.enabled = false;
+            //      attacking = false;
+            //      //Game Over
+            //  }
+            //  if (currentTimer >= timerMeteor)
+            //  {
+            //      Destroy(collision.gameObject);
+            //      attacking = false;
+            //  }
+            //}
+            //else
+            //{
+                score += collision.GetComponent<Meteor>().score;
+                Destroy(collision.gameObject);
+            //}
         }
     }
 }

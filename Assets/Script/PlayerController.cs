@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public string moveLeft, moveRight;
     bool attacking,inMovement;
     public BoxCollider2D colliderLeft, colliderRight;
-    public int speed;
+    public float speed;
     public float distanceMin;
     public int score;
 
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
             colliderLeft.enabled = false;
             colliderRight.enabled = false;
 
-            this.transform.position = Vector3.Lerp(this.transform.position, movementPoints[pos].transform.position, Time.deltaTime * speed);
+            this.transform.position = Vector3.Lerp(this.transform.position, movementPoints[pos].transform.position, speed);
             if (Vector3.Distance(this.transform.position, movementPoints[pos].transform.position) <= distanceMin)
             {
                 this.transform.position = movementPoints[pos].transform.position;

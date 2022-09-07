@@ -10,6 +10,7 @@ TagManager:
   - dir4
   - dir5
   - dir6
+  - Asteroid
   layers:
   - Default
   - TransparentFX

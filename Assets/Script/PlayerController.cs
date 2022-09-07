@@ -11,6 +11,13 @@ public class PlayerController : MonoBehaviour
     public BoxCollider2D colliderLeft, colliderRight;
     public int speed;
     public float distanceMin;
+    public int score;
+
+    [Header("Secondary Movement")]
+    [SerializeField]
+    bool secondMovement=false;
+    public int speedMovement=10;
+    public GameObject limitDistanceLeft, limitDistanceRight;
 
     void Start()
     {
@@ -29,25 +36,39 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            secondMovement = !secondMovement;
+
         if (!attacking)
         {
-            if (Input.GetKeyDown(moveLeft) && !inMovement)
+            if (!secondMovement)
             {
-                if (pos > 0)
+                if (Input.GetKeyDown(moveLeft) && !inMovement)
                 {
-                    pos--;
-                    //this.transform.position = movementPoints[pos].transform.position;
-                    inMovement = true;
+                    if (pos > 0)
+                    {
+                        pos--;
+                        //this.transform.position = movementPoints[pos].transform.position;
+                        inMovement = true;
+                    }
+                }
+                else if (Input.GetKeyDown(moveRight) && !inMovement)
+                {
+                    if (pos < 2)
+                    {
+                        pos++;
+                        //this.transform.position = movementPoints[pos].transform.position;
+                        inMovement = true;
+                    }
                 }
             }
-            else if (Input.GetKeyDown(moveRight) && !inMovement)
+            else
             {
-                if (pos < 2)
-                {
-                    pos++;
-                    //this.transform.position = movementPoints[pos].transform.position;
-                    inMovement = true;
-                }
+                this.transform.position += new Vector3(Input.GetAxis("Horizontal"), 0,0) * Time.deltaTime * speedMovement;
+                if (this.transform.position.x < limitDistanceLeft.transform.position.x)
+                    this.transform.position = limitDistanceLeft.transform.position;
+                if (this.transform.position.x > limitDistanceRight.transform.position.x)
+                    this.transform.position = limitDistanceRight.transform.position;
             }
 
             if (Input.GetButtonDown("Fire1"))
@@ -65,6 +86,9 @@ public class PlayerController : MonoBehaviour
         }
         if (inMovement)
         {
+            colliderLeft.enabled = false;
+            colliderRight.enabled = false;
+
             this.transform.position = Vector3.Lerp(this.transform.position, movementPoints[pos].transform.position, Time.deltaTime * speed);
             if (Vector3.Distance(this.transform.position, movementPoints[pos].transform.position) <= distanceMin)
             {
@@ -79,7 +103,8 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Asteroid")
         {
             Debug.Log("CASSER");
+            score+=collision.GetComponent<Meteor>().score;
+            Destroy(collision.gameObject);
         }
     }
-
 }

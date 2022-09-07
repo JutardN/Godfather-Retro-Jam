@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bb7f6461ad8374eb2d23ffe48cd685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMinMax: {x: 5, y: 7}
   direction: {x: 0, y: 0, z: 0}
   dir1: {x: 0, y: 0, z: 0}
   dir2: {x: 0, y: 0, z: 0}
@@ -129,6 +128,7 @@ MonoBehaviour:
   dir5: {x: 0, y: 0, z: 0}
   dir6: {x: 0, y: 0, z: 0}
   duration: 4
+  score: 50
 --- !u!70 &2410458600284362957
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

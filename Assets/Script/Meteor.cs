@@ -18,6 +18,7 @@ public class Meteor : MonoBehaviour
     public float duration = 4f;
     private int random;
 
+    public int score=0;
     private void Awake()
     {
         initPos = transform.position;

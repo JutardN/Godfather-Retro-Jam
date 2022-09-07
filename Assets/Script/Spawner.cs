@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject meteor;
+    public GameObject spawner;
 
     float nextSpawnTime;
     public float widthMax = 1;
@@ -19,6 +20,7 @@ public class Spawner : MonoBehaviour
     {
         // Largeur du spawner ( largeur d'écran x multiplicateur ) 
         screenHalfSizeWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize * widthMax, Camera.main.orthographicSize);
+        spawner.transform.localScale = new Vector3(1, spawner.transform.localScale.y * widthMax, 1);
     }
 
     void Update()
@@ -34,7 +36,7 @@ public class Spawner : MonoBehaviour
             GameObject newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward * spawnAngle));
             newBlock.transform.localScale = Vector2.one * spawnSize;
 
-            Debug.Log(Difficulty.GetDifficultyPercent());
+            //Debug.Log(Difficulty.GetDifficultyPercent());
         }
 
     }

@@ -7,15 +7,21 @@ public class Meteor : MonoBehaviour
     public Vector3 direction;
     private Vector3 initPos;
 
-    public Vector3 dir1;
-    public Vector3 dir2;
-    public Vector3 dir3;
-    public Vector3 dir4;
-    public Vector3 dir5;
-    public Vector3 dir6;
+    private Vector3 dir1;
+    private Vector3 dir2;
+    private Vector3 dir3;
+    private Vector3 dir4;
+    private Vector3 dir5;
+    private Vector3 dir6;
+
+    public bool asteroid;
 
     private float elapsedTime;
     public float duration = 4f;
+    public float minDuration = 2f;
+    private float percentageCompleted;
+    public float timeToDestroy;
+
     private int random;
 
     public int score=0;
@@ -24,7 +30,13 @@ public class Meteor : MonoBehaviour
         initPos = transform.position;
     }
     void Start()
-    {       
+    {
+        //
+        if(asteroid)
+            gameObject.transform.localScale = new Vector3(8, 8, 1);
+        else
+        gameObject.transform.localScale = new Vector3(3, 3, 1); // A MODIFIER PLUS TARD ET INSTANTIER UN AUTRE PREFAB DANS LE SPAWNER
+
         dir1 = GameObject.FindGameObjectWithTag("dir1").transform.position;
         dir2 = GameObject.FindGameObjectWithTag("dir2").transform.position;
         dir3 = GameObject.FindGameObjectWithTag("dir3").transform.position;
@@ -35,9 +47,17 @@ public class Meteor : MonoBehaviour
         if (initPos.x >= 0)
             random = Random.Range(1, 4);
         else
+        {
             random = Random.Range(4, 7);
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-gameObject.GetComponent<BoxCollider2D>().offset.x, gameObject.GetComponent<BoxCollider2D>().offset.y);
+        }
 
-            // Assignation de la direction de la météorite
+        // Durée avant impact
+
+        duration = Mathf.Lerp(duration, minDuration, Difficulty.GetDifficultyPercent());
+
+        // Assignation de la direction de la météorite
         if (random == 1)
             direction = dir1;
         else if (random == 2)
@@ -55,15 +75,28 @@ public class Meteor : MonoBehaviour
 
     void Update()
     {
+
         elapsedTime += Time.deltaTime;
-        float percentageCompleted = (elapsedTime / duration);
+        percentageCompleted = (elapsedTime / duration);
 
         // météor se déplaçant vers sa direction
-        transform.position = Vector2.Lerp(initPos, direction, percentageCompleted);
+        if (!asteroid)
+            transform.position = Vector2.Lerp(initPos, direction, percentageCompleted);
+
+        else
+            StartCoroutine(Asteroid());
 
         if (transform.position.y == direction.y)
         {
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator Asteroid()
+    {
+        transform.position = Vector2.Lerp(initPos, direction * 0.3f, percentageCompleted );
+        yield return new WaitForSeconds(timeToDestroy);
+        Debug.Log("Explosion");
+        StopAllCoroutines();
     }
 }

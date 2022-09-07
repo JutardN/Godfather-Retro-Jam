@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2213433637674954164}
   - component: {fileID: 2213433637674954167}
   - component: {fileID: -682653350540877771}
-  - component: {fileID: 2410458600284362957}
+  - component: {fileID: 4484712845531149807}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Asteroid
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f68c27c26221d8408245cfd6f472366, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,16 +121,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
-  dir1: {x: 0, y: 0, z: 0}
-  dir2: {x: 0, y: 0, z: 0}
-  dir3: {x: 0, y: 0, z: 0}
-  dir4: {x: 0, y: 0, z: 0}
-  dir5: {x: 0, y: 0, z: 0}
-  dir6: {x: 0, y: 0, z: 0}
-  duration: 4
+  asteroid: 0
+  duration: 5
+  minDuration: 1
+  timeToDestroy: 6
   score: 50
---- !u!70 &2410458600284362957
-CapsuleCollider2D:
+--- !u!61 &4484712845531149807
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -142,6 +139,16 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: -0.1711831, y: -0.18755722}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.2976339, y: 0.19343567}
+  m_EdgeRadius: 0

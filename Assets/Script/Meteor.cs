@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Meteor : MonoBehaviour
 {
@@ -165,7 +166,7 @@ public class Meteor : MonoBehaviour
 
         if (transform.position.y == direction.y)
         {
-            Destroy(gameObject);
+            SceneManager.LoadScene(2);
         }
     }
    

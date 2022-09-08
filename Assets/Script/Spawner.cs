@@ -7,12 +7,21 @@ public class Spawner : MonoBehaviour
     public GameObject meteor;
     public GameObject spawner;
 
+    public bool asteroidEvent = false;
+    
+    private bool inProgress;
+
     float nextSpawnTime;
     public float widthMax = 1;
     public float spawnAngleMax;
 
     public Vector2 spawnSizeMinMax;
     public Vector2 secondsBetweenSpawnsMinMax;
+
+    public int numberOfSpawns;
+
+    public Vector2 asteroidTimingMinMax;
+   [HideInInspector] public float asteroidTiming = 5f;
 
     Vector2 screenHalfSizeWorldUnits;
 
@@ -21,23 +30,48 @@ public class Spawner : MonoBehaviour
         // Largeur du spawner ( largeur d'écran x multiplicateur ) 
         screenHalfSizeWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize * widthMax, Camera.main.orthographicSize);
         spawner.transform.localScale = new Vector3(1, spawner.transform.localScale.y * widthMax, 1);
+
+        asteroidTiming = Random.Range(asteroidTimingMinMax.x, asteroidTimingMinMax.y);
     }
 
     void Update()
+    {
+
+        if (Time.time >= asteroidTiming)
+            asteroidEvent = true;
+
+        if(!asteroidEvent)
+        NormalSpawning();
+        else
+        {
+            if (inProgress == false)
+            {
+                float spawnSize = Random.Range(spawnSizeMinMax.x, spawnSizeMinMax.y);
+                Vector2 spawnPosition = new Vector2(Random.Range(-screenHalfSizeWorldUnits.x, screenHalfSizeWorldUnits.x), screenHalfSizeWorldUnits.y + spawnSize);
+                GameObject newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward));
+                numberOfSpawns++;
+                inProgress = true;
+            }
+                 
+        }
+    }
+
+    public void NormalSpawning()
     {
         // Assignation des paramètres du météor lors du spawn
         if (Time.time > nextSpawnTime)
         {
             nextSpawnTime = Time.time + Random.Range(secondsBetweenSpawnsMinMax.y, secondsBetweenSpawnsMinMax.x);
 
-            float spawnAngle = Random.Range(-spawnAngleMax, spawnAngleMax);
+
             float spawnSize = Random.Range(spawnSizeMinMax.x, spawnSizeMinMax.y);
             Vector2 spawnPosition = new Vector2(Random.Range(-screenHalfSizeWorldUnits.x, screenHalfSizeWorldUnits.x), screenHalfSizeWorldUnits.y + spawnSize);
-            GameObject newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward * spawnAngle));
+            GameObject newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward));
+            numberOfSpawns++;
             newBlock.transform.localScale = Vector2.one * spawnSize;
+            
 
             //Debug.Log(Difficulty.GetDifficultyPercent());
         }
-
     }
 }

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
-{    
+{
     public GameObject meteor;
     public GameObject spawner;
     private GameObject newBlock;
 
     [HideInInspector] public bool asteroidEvent = false;
-    
+
     private bool inProgress;
 
     float nextSpawnTime;
     public int numberOfSpawns;
 
-    [Header ("Largeur du spawner = largeur de l'écran x le multiplier")]
+    [Header("Largeur du spawner = largeur de l'écran x le multiplier")]
     public float multiplier = 1;
     [HideInInspector] public float spawnAngleMax;
 
@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
 
     [Header("Plage de temps en seconde où le gros météor apparait")]
     public Vector2 asteroidTimingMinMax;
-   [HideInInspector] public float asteroidTiming = 5f;
+    [HideInInspector] public float asteroidTiming = 5f;
 
     Vector2 screenHalfSizeWorldUnits;
 
@@ -48,8 +48,8 @@ public class Spawner : MonoBehaviour
         if (Time.time >= asteroidTiming)
             asteroidEvent = true;
 
-        if(!asteroidEvent)
-        NormalSpawning();
+        if (!asteroidEvent)
+            NormalSpawning();
         else
         {
             if (inProgress == false)
@@ -60,7 +60,7 @@ public class Spawner : MonoBehaviour
                 numberOfSpawns++;
                 inProgress = true;
             }
-                 
+
         }
     }
 
@@ -75,10 +75,10 @@ public class Spawner : MonoBehaviour
             float spawnSize = Random.Range(spawnSizeMinMax.x, spawnSizeMinMax.y);
             spawnPosition = new Vector2(Random.Range(-screenHalfSizeWorldUnits.x, screenHalfSizeWorldUnits.x), screenHalfSizeWorldUnits.y + spawnSize);
             newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward));
-            
+
             numberOfSpawns++;
             newBlock.transform.localScale = Vector2.one * spawnSize;
-            
+
 
             //Debug.Log(Difficulty.GetDifficultyPercent());
         }

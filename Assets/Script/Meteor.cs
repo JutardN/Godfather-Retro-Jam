@@ -27,8 +27,8 @@ public class Meteor : MonoBehaviour
     private float elapsedTime;
 
     [HideInInspector] public bool littleMeteor = false;
-    [HideInInspector]public bool meteor = false ;
-    [HideInInspector] public bool asteroid = false ;
+    [HideInInspector] public bool meteor = false;
+    [HideInInspector] public bool asteroid = false;
 
     [HideInInspector] public float timeToDestroy;
 
@@ -55,18 +55,19 @@ public class Meteor : MonoBehaviour
     public float maxBigDuration = 6f;
     [HideInInspector] public bool crashing = true;
 
+    bool end;
     private void Awake()
     {
         initPos = transform.position;
-        
+
     }
     void Start()
     {
         //
-        if(asteroid)
+        if (asteroid)
             gameObject.transform.localScale = new Vector3(8, 8, 1);
         else
-        gameObject.transform.localScale = new Vector3(5, 5, 1);
+            gameObject.transform.localScale = new Vector3(5, 5, 1);
 
         spawner = GameObject.FindGameObjectWithTag("spawner").GetComponent<Spawner>();
 
@@ -90,7 +91,7 @@ public class Meteor : MonoBehaviour
                 littleMeteor = true;
             else
                 meteor = true;
-        }       
+        }
 
         if (littleMeteor)
         {
@@ -122,7 +123,7 @@ public class Meteor : MonoBehaviour
         {
             directionRand = Random.Range(4, 7);
             gameObject.transform.rotation = Quaternion.Euler(0, 160, 0);
-            
+
         }
 
         // Durée avant impact
@@ -147,27 +148,32 @@ public class Meteor : MonoBehaviour
 
     void Update()
     {
-        atmPos = transform.position;
-        elapsedTime += Time.deltaTime;
-        percentageCompleted = (elapsedTime / maxDuration);
-        
-        // météor se déplaçant vers sa direction
-        if (!asteroid)
-            transform.position = Vector2.Lerp(initPos, direction, percentageCompleted);
-
-        else
+        if (!end)
         {
-            if(crashing)
+            atmPos = transform.position;
+            elapsedTime += Time.deltaTime;
+            percentageCompleted = (elapsedTime / maxDuration);
+
+            // météor se déplaçant vers sa direction
+            if (!asteroid)
                 transform.position = Vector2.Lerp(initPos, direction, percentageCompleted);
-            else
-                transform.position = atmPos;
-        }
-            
 
-        if (transform.position.y == direction.y)
-        {
-            SceneManager.LoadScene(2);
+            else
+            {
+                if (crashing)
+                    transform.position = Vector2.Lerp(initPos, direction, percentageCompleted);
+                else
+                    transform.position = atmPos;
+            }
+
+
+            if (transform.position.y == direction.y)
+            {
+                var player = GameObject.FindObjectOfType<PlayerController>();
+                ScoreSave.SaveScore(player.score);
+                player.StartCoroutine(player.End());
+                end = true;
+            }
         }
     }
-   
 }

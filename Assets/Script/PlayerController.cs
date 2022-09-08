@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] movementPoints = new GameObject[3];
     int pos;
     public string moveLeft, moveRight;
+    public string hitLeft, hitRight;
     bool attacking, inMovement, spamming;
     public BoxCollider2D colliderLeft, colliderRight;
     public float speed;
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour
         }
         if (moveLeft == null || moveRight == null)
             Debug.LogError("No Key to move");
+        if (hitLeft == null || hitRight == null)
+            Debug.LogError("No Key to attack");
 
         currentTimerSpam = timerMeteorSpam;
     }
@@ -75,12 +78,12 @@ public class PlayerController : MonoBehaviour
                     this.transform.position = limitDistanceRight.transform.position;
             }
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetKeyDown(hitLeft))
             {
                 colliderRight.enabled = false;
                 colliderLeft.enabled = true;
             }
-            else if (Input.GetButtonDown("Fire2"))
+            else if (Input.GetKeyDown(hitRight))
             {
                 colliderLeft.enabled = false;
                 colliderRight.enabled = true;

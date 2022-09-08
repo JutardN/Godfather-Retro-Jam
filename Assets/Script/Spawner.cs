@@ -7,19 +7,24 @@ public class Spawner : MonoBehaviour
     public GameObject meteor;
     public GameObject spawner;
 
-    public bool asteroidEvent = false;
+    [HideInInspector] public bool asteroidEvent = false;
     
     private bool inProgress;
 
     float nextSpawnTime;
-    public float widthMax = 1;
-    public float spawnAngleMax;
-
-    public Vector2 spawnSizeMinMax;
-    public Vector2 secondsBetweenSpawnsMinMax;
-
     public int numberOfSpawns;
 
+    [Header ("Largeur du spawner = largeur de l'écran x le multiplier")]
+    public float multiplier = 1;
+    [HideInInspector] public float spawnAngleMax;
+
+    [HideInInspector] public Vector2 spawnSizeMinMax;
+    [Header("CD de spawn minimal et maximal")]
+    public Vector2 secondsBetweenSpawnsMinMax;
+
+
+
+    [Header("Plage de temps en seconde où le gros météor apparait")]
     public Vector2 asteroidTimingMinMax;
    [HideInInspector] public float asteroidTiming = 5f;
 
@@ -28,8 +33,8 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         // Largeur du spawner ( largeur d'écran x multiplicateur ) 
-        screenHalfSizeWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize * widthMax, Camera.main.orthographicSize);
-        spawner.transform.localScale = new Vector3(1, spawner.transform.localScale.y * widthMax, 1);
+        screenHalfSizeWorldUnits = new Vector2(Camera.main.aspect * Camera.main.orthographicSize * multiplier, Camera.main.orthographicSize);
+        spawner.transform.localScale = new Vector3(1, spawner.transform.localScale.y * multiplier, 1);
 
         asteroidTiming = Random.Range(asteroidTimingMinMax.x, asteroidTimingMinMax.y);
     }

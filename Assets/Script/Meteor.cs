@@ -15,18 +15,18 @@ public class Meteor : MonoBehaviour
     private Vector3 dir5;
     private Vector3 dir6;
 
-    public Spawner spawner;
+    [HideInInspector] public Spawner spawner;
 
     public SpriteRenderer moyenMeteor;
     public SpriteRenderer big;
 
     private float elapsedTime;
 
-    public bool littleMeteor = false;
-    public bool meteor = false ;
-    public bool asteroid = false ;
+    [HideInInspector] public bool littleMeteor = false;
+    [HideInInspector] public bool meteor = false ;
+    [HideInInspector] public bool asteroid = false ;
 
-    public float timeToDestroy;
+    [HideInInspector] public float timeToDestroy;
 
     private int typeOfMeteorRand;
     private int directionRand;
@@ -49,8 +49,7 @@ public class Meteor : MonoBehaviour
     [Header("Paramètres : Grosse météorite")]
     public float minBigDuration = 6f;
     public float maxBigDuration = 6f;
-    public float speed = 4f;
-    public bool crashing = true;
+    [HideInInspector] public bool crashing = true;
 
     private void Awake()
     {

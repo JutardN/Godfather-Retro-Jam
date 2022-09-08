@@ -11,6 +11,7 @@ TagManager:
   - dir5
   - dir6
   - Asteroid
+  - spawner
   layers:
   - Default
   - TransparentFX

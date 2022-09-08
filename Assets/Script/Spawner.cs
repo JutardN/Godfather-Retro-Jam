@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
-{
+{    
     public GameObject meteor;
     public GameObject spawner;
+    private GameObject newBlock;
 
     [HideInInspector] public bool asteroidEvent = false;
     
@@ -21,6 +22,8 @@ public class Spawner : MonoBehaviour
     [HideInInspector] public Vector2 spawnSizeMinMax;
     [Header("CD de spawn minimal et maximal")]
     public Vector2 secondsBetweenSpawnsMinMax;
+
+    private Vector2 spawnPosition;
 
 
 
@@ -70,8 +73,9 @@ public class Spawner : MonoBehaviour
 
 
             float spawnSize = Random.Range(spawnSizeMinMax.x, spawnSizeMinMax.y);
-            Vector2 spawnPosition = new Vector2(Random.Range(-screenHalfSizeWorldUnits.x, screenHalfSizeWorldUnits.x), screenHalfSizeWorldUnits.y + spawnSize);
-            GameObject newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward));
+            spawnPosition = new Vector2(Random.Range(-screenHalfSizeWorldUnits.x, screenHalfSizeWorldUnits.x), screenHalfSizeWorldUnits.y + spawnSize);
+            newBlock = (GameObject)Instantiate(meteor, spawnPosition, Quaternion.Euler(Vector3.forward));
+            
             numberOfSpawns++;
             newBlock.transform.localScale = Vector2.one * spawnSize;
             
@@ -79,4 +83,5 @@ public class Spawner : MonoBehaviour
             //Debug.Log(Difficulty.GetDifficultyPercent());
         }
     }
+
 }

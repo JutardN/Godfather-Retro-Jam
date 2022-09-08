@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
+    public GameObject clone1;
+    public GameObject clone2;
+
     private Vector3 direction;
     private Vector3 initPos;
     private Vector3 atmPos;
@@ -23,7 +26,7 @@ public class Meteor : MonoBehaviour
     private float elapsedTime;
 
     [HideInInspector] public bool littleMeteor = false;
-    [HideInInspector] public bool meteor = false ;
+    [HideInInspector]public bool meteor = false ;
     [HideInInspector] public bool asteroid = false ;
 
     [HideInInspector] public float timeToDestroy;
@@ -62,7 +65,7 @@ public class Meteor : MonoBehaviour
         if(asteroid)
             gameObject.transform.localScale = new Vector3(8, 8, 1);
         else
-        gameObject.transform.localScale = new Vector3(5, 5, 1); // A MODIFIER PLUS TARD ET INSTANTIER UN AUTRE PREFAB DANS LE SPAWNER
+        gameObject.transform.localScale = new Vector3(5, 5, 1);
 
         spawner = GameObject.FindGameObjectWithTag("spawner").GetComponent<Spawner>();
 
@@ -92,19 +95,24 @@ public class Meteor : MonoBehaviour
         {
             minDuration = minLittleDuration;
             maxDuration = maxLittleDuration;
-
+            clone1.SetActive(true);
+            clone2.SetActive(true);
         }
         if (meteor)
         {
             minDuration = minMidDuration;
             maxDuration = maxMidDuration;
             gameObject.GetComponent<SpriteRenderer>().sprite = moyenMeteor.sprite;
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.08f, -0.1f);
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.18f, 0.1f);
         }
         if (asteroid)
         {
             minDuration = minBigDuration;
             maxDuration = maxBigDuration;
             gameObject.GetComponent<SpriteRenderer>().sprite = big.sprite;
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.16f, -0.13f);
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.32f, 0.29f);
         }
 
         if (initPos.x >= 0)
@@ -112,8 +120,8 @@ public class Meteor : MonoBehaviour
         else
         {
             directionRand = Random.Range(4, 7);
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-gameObject.GetComponent<BoxCollider2D>().offset.x, gameObject.GetComponent<BoxCollider2D>().offset.y);
+            gameObject.transform.rotation = Quaternion.Euler(0, 160, 0);
+            
         }
 
         // Durée avant impact

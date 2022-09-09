@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
                     if (Input.GetKeyDown(hitLeft))
                     {
-                        collider.offset = new Vector2(-0.2f, 0.2f);
+                        collider.offset = new Vector2(-0.2f, collider.offset.y);
                         sprite.flipX = false;
                         anim.SetTrigger("Attacking");
                         attacking = true;
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else if (Input.GetKeyDown(hitRight))
                     {
-                        collider.offset = new Vector2(0.2f, 0.2f);
+                        collider.offset = new Vector2(0.2f, collider.offset.y);
                         sprite.flipX = true;
                         anim.SetTrigger("Attacking");
                         attacking = true;

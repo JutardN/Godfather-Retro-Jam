@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
 
     public bool asteroidEvent = false;
 
-    private bool inProgress;
+    public bool inProgress;
 
     float nextSpawnTime;
     public int numberOfSpawns;

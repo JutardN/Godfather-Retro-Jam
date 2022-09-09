@@ -160,6 +160,7 @@ public class PlayerController : MonoBehaviour
                         anim.SetBool("StopOnAttacking", false);
                         Destroy(currentMeteor.gameObject);
                         spawner.asteroidTiming += Time.time;
+                        spawner.inProgress = false;
                         spamming = false;
                         canvasHit.SetActive(false);
                         audio.PlayOneShot(explosion);

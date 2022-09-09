@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
     bool end,pause;
     public TextMeshProUGUI scoreText;
 
+    public GameObject canvasHit;
+    public TextMeshProUGUI textInput;
+    public TextMeshProUGUI textTimer;
+
     void Start()
     {
         if (movementPoints.Length == 3)
@@ -139,12 +143,15 @@ public class PlayerController : MonoBehaviour
                     currentTimer += Time.deltaTime;
                     currentTimerSpam -= Time.deltaTime;
 
+                    textTimer.text = ((int)(timerMeteor - currentTimer)).ToString() + "s";
+
                     if (currentTimerSpam <= 0)
                     {
                         collider.enabled = false;
                         anim.SetBool("StopOnAttacking", false);
                         spamming = false;
                         ScoreSave.SaveScore(score);
+                        canvasHit.SetActive(false);
                         SceneManager.LoadScene(2);
                     }
 
@@ -152,8 +159,9 @@ public class PlayerController : MonoBehaviour
                     {
                         anim.SetBool("StopOnAttacking", false);
                         Destroy(currentMeteor.gameObject);
-                        spawner.asteroidEvent = false;
+                        spawner.asteroidTiming += Time.time;
                         spamming = false;
+                        canvasHit.SetActive(false);
                         audio.PlayOneShot(explosion);
                     }
 
@@ -178,6 +186,8 @@ public class PlayerController : MonoBehaviour
             if (currentMeteor.asteroid)
             {
                 spamming = true;
+                textInput.text = saveHitTouch;
+                canvasHit.SetActive(true);
                 currentMeteor.crashing = false;
                 anim.SetBool("StopOnAttacking", true);
                 audio.PlayOneShot(contact);

@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     public GameObject spawner;
     private GameObject newBlock;
 
-    [HideInInspector] public bool asteroidEvent = false;
+    public bool asteroidEvent = false;
 
     private bool inProgress;
 
@@ -47,6 +47,8 @@ public class Spawner : MonoBehaviour
 
         if (Time.time >= asteroidTiming)
             asteroidEvent = true;
+        else
+            asteroidEvent = false;
 
         if (!asteroidEvent)
             NormalSpawning();

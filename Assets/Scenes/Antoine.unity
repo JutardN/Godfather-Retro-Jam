@@ -1984,15 +1984,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_Size.y
-      value: 0.5
+      value: 0.07196888
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_Offset.x
-      value: -0.2
+      value: -0.20000002
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_Offset.y
-      value: 0.2
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_IsTrigger
@@ -2703,6 +2703,7 @@ MonoBehaviour:
   meteor: {fileID: 2213433637674954166, guid: 717f3c53aaa8ae747aa2ec50b950ecac, type: 3}
   spawner: {fileID: 1967545482}
   asteroidEvent: 0
+  inProgress: 0
   numberOfSpawns: 0
   multiplier: 1
   spawnAngleMax: 0

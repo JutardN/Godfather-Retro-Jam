@@ -27,15 +27,17 @@ public class PlayerController : MonoBehaviour
     Meteor currentMeteor;
     public GameObject pauseMenu;
 
-    public AudioClip batte,explosion,moyenne,petite,contact;
+    public AudioClip batte, explosion, moyenne, petite, contact;
     AudioSource audio;
     public Animator animCanvas;
-    bool end,pause;
+    bool end, pause;
     public TextMeshProUGUI scoreText;
 
     public GameObject canvasHit;
     public TextMeshProUGUI textInput;
     public TextMeshProUGUI textTimer;
+
+    float posCanvasLeft, posCanvasRight;
 
     void Start()
     {
@@ -57,7 +59,9 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
-        scoreText.text = "SCORE: "+score;
+        scoreText.text = "SCORE: " + score;
+        posCanvasLeft = -377;
+        posCanvasRight = -125;
     }
 
     void Update()
@@ -110,6 +114,16 @@ public class PlayerController : MonoBehaviour
                         attacking = true;
                         saveHitTouch = hitLeft;
                         audio.PlayOneShot(batte);
+                        if (pos != 2)
+                        {
+                            textInput.gameObject.transform.localPosition = new Vector2(posCanvasRight, textInput.gameObject.transform.localPosition.y);
+                            textTimer.gameObject.transform.localPosition = new Vector2(posCanvasRight, textTimer.gameObject.transform.localPosition.y);
+                        }
+                        else
+                        {
+                            textInput.gameObject.transform.localPosition = new Vector2(posCanvasLeft, textInput.gameObject.transform.localPosition.y);
+                            textTimer.gameObject.transform.localPosition = new Vector2(posCanvasLeft, textTimer.gameObject.transform.localPosition.y);
+                        }
                     }
                     else if (Input.GetKeyDown(hitRight))
                     {
@@ -119,6 +133,16 @@ public class PlayerController : MonoBehaviour
                         attacking = true;
                         saveHitTouch = hitRight;
                         audio.PlayOneShot(batte);
+                        if (pos != 0)
+                        {
+                            textInput.gameObject.transform.localPosition = new Vector2(posCanvasLeft, textInput.gameObject.transform.localPosition.y);
+                            textTimer.gameObject.transform.localPosition = new Vector2(posCanvasLeft, textTimer.gameObject.transform.localPosition.y);
+                        }
+                        else
+                        {
+                            textInput.gameObject.transform.localPosition = new Vector2(posCanvasRight, textInput.gameObject.transform.localPosition.y);
+                            textTimer.gameObject.transform.localPosition = new Vector2(posCanvasRight, textTimer.gameObject.transform.localPosition.y);
+                        }
                     }
 
                 }
@@ -164,6 +188,8 @@ public class PlayerController : MonoBehaviour
                         spamming = false;
                         canvasHit.SetActive(false);
                         audio.PlayOneShot(explosion);
+                        currentTimer = 0;
+                        currentTimerSpam = timerMeteorSpam;
                     }
 
                     if (Input.GetKeyDown(saveHitTouch))

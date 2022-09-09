@@ -15,7 +15,7 @@ public class EndButton : MonoBehaviour
                 choice = true;
                 StartCoroutine(retry());
             }
-            else if (Input.GetKeyDown(KeyCode.Delete))
+            else if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Application.Quit();
             }

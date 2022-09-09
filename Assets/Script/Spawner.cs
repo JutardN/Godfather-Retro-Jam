@@ -44,8 +44,8 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-
-        if (Time.time >= asteroidTiming)
+        //Debug.Log(Time.time);
+        if (Time.timeSinceLevelLoad >= asteroidTiming)
             asteroidEvent = true;
         else
             asteroidEvent = false;

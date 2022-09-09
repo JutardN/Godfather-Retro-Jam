@@ -65,9 +65,9 @@ public class Meteor : MonoBehaviour
     {
         //
         if (asteroid)
-            gameObject.transform.localScale = new Vector3(8, 8, 1);
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
         else
-            gameObject.transform.localScale = new Vector3(5, 5, 1);
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
 
         spawner = GameObject.FindGameObjectWithTag("spawner").GetComponent<Spawner>();
 

@@ -1980,19 +1980,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_Size.x
-      value: 0.21144909
+      value: 0.12483972
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_Size.y
-      value: 0.049010873
+      value: 0.04653442
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_Offset.x
-      value: -0.15572456
+      value: -0.11241987
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_Offset.y
-      value: 0.123215675
+      value: 0.11454821
       objectReference: {fileID: 0}
     - target: {fileID: 2342363104959816756, guid: 5c7524f484678324fb3d30314fb5bf40, type: 3}
       propertyPath: m_IsTrigger

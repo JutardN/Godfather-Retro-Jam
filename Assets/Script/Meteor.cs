@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Meteor : MonoBehaviour
 {
-    public GameObject clone1;
-    public GameObject clone2;
+    
 
     private Vector3 direction;
     private Vector3 initPos;
@@ -97,24 +96,23 @@ public class Meteor : MonoBehaviour
         {
             minDuration = minLittleDuration;
             maxDuration = maxLittleDuration;
-            clone1.SetActive(true);
-            clone2.SetActive(true);
+         
         }
         if (meteor)
         {
             minDuration = minMidDuration;
             maxDuration = maxMidDuration;
             gameObject.GetComponent<SpriteRenderer>().sprite = moyenMeteor.sprite;
-            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.08f, -0.1f);
-            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.18f, 0.1f);
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.077f, -0.1f);
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.15f, 0.1f);
         }
         if (asteroid)
         {
             minDuration = minBigDuration;
             maxDuration = maxBigDuration;
             gameObject.GetComponent<SpriteRenderer>().sprite = big.sprite;
-            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.16f, -0.13f);
-            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.32f, 0.29f);
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(-0.18f, -0.228f);
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(0.28f, 0.092f);
         }
 
         if (initPos.x >= 0)

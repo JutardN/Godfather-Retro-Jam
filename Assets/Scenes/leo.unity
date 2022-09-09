@@ -971,7 +971,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dino Balls
+  m_text: CHADINO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ce5fa65ca6a18343a74658f0d8d4c25, type: 2}
   m_sharedMaterial: {fileID: 2843612686504120534, guid: 1ce5fa65ca6a18343a74658f0d8d4c25, type: 2}
